@@ -312,13 +312,14 @@ CORS is configured in `CorsConfig.java` to allow requests from:
 
 ## Team Members
 
-| Name | Role |
-|------|------|
-| **Mohamed Taher Elrefaey** | Full-Stack Development |
-| **Kareem Mohamed Zaki** | Backend Development |
-| **Ganna Amr Emad** | Frontend Development |
-| **Maryam Mohamed Darwish** | Database Design |
-| **Haneen Mahmoud Abdelfatah** | UI/UX Design |
+| Name |
+|------|
+| **Mohamed Taher Elrefaey** |
+| **Kareem Mohamed Zaki** |
+| **Ganna Amr Emad** |
+| **Maryam Mohamed Darwish** |
+| **Haneen Mahmoud Abdelfatah** |
+| **Hamdy Mohamed** |
 
 ---
 
