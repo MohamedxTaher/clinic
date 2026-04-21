@@ -1,27 +1,27 @@
-CREATE DATABASE clinic_db;
+CREATE DATABASE clinic_db COLLATE Arabic_100_CI_AS;
 USE clinic_db;
 
 -- 1. جدول الدكاترة
 CREATE TABLE doctors (
     id             INT IDENTITY PRIMARY KEY,
-    name           VARCHAR(100) COLLATE Arabic_100_CI_AS NOT NULL,
-    specialization VARCHAR(100) COLLATE Arabic_100_CI_AS NOT NULL
+    name           NVARCHAR(100) COLLATE Arabic_100_CI_AS NOT NULL,
+    specialization NVARCHAR(100) COLLATE Arabic_100_CI_AS NOT NULL
 );
 
 -- 2. جدول المرضى
 CREATE TABLE patients (
     id    INT IDENTITY PRIMARY KEY,
-    name  VARCHAR(100) COLLATE Arabic_100_CI_AS NOT NULL,
-    phone VARCHAR(20)  COLLATE Arabic_100_CI_AS NOT NULL,
-    email VARCHAR(100) COLLATE Arabic_100_CI_AS UNIQUE NOT NULL
+    name  NVARCHAR(100) COLLATE Arabic_100_CI_AS NOT NULL,
+    phone NVARCHAR(20)  COLLATE Arabic_100_CI_AS NOT NULL,
+    email NVARCHAR(100) COLLATE Arabic_100_CI_AS UNIQUE NOT NULL
 );
 
 -- 3. جدول المواعيد
 CREATE TABLE appointments (
     id         INT IDENTITY PRIMARY KEY,
     date       DATE NOT NULL,
-    time       VARCHAR(20) COLLATE Arabic_100_CI_AS NULL,
-    status     VARCHAR(50) COLLATE Arabic_100_CI_AS DEFAULT 'Pending',
+    time       NVARCHAR(20) COLLATE Arabic_100_CI_AS NULL,
+    status     NVARCHAR(50) COLLATE Arabic_100_CI_AS DEFAULT N'Pending',
     patient_id INT NULL,
     doctor_id  INT NULL,
     CONSTRAINT fk_app_patient FOREIGN KEY (patient_id) REFERENCES patients(id) ON DELETE SET NULL,
@@ -125,35 +125,3 @@ FROM appointments a
 LEFT JOIN patients p ON a.patient_id = p.id
 LEFT JOIN doctors  d ON a.doctor_id  = d.id
 ORDER BY a.id;
-
--- =================== MIGRATION SCRIPT (For Existing Databases) ===================
--- Run these commands if you already have an existing database with the old schema
--- This will add the missing columns without dropping any data
-
-/*
--- Add Arabic collation to existing columns (run individually)
-ALTER TABLE doctors ALTER COLUMN name VARCHAR(100) COLLATE Arabic_100_CI_AS NOT NULL;
-ALTER TABLE doctors ALTER COLUMN specialization VARCHAR(100) COLLATE Arabic_100_CI_AS NOT NULL;
-ALTER TABLE patients ALTER COLUMN name VARCHAR(100) COLLATE Arabic_100_CI_AS NOT NULL;
-ALTER TABLE patients ALTER COLUMN phone VARCHAR(20) COLLATE Arabic_100_CI_AS NOT NULL;
-ALTER TABLE patients ALTER COLUMN email VARCHAR(100) COLLATE Arabic_100_CI_AS UNIQUE NOT NULL;
-
--- Add missing columns to appointments table
-IF NOT EXISTS (SELECT * FROM sys.columns WHERE object_id = OBJECT_ID('appointments') AND name = 'time')
-    ALTER TABLE appointments ADD time VARCHAR(20) COLLATE Arabic_100_CI_AS NULL;
-
-IF NOT EXISTS (SELECT * FROM sys.columns WHERE object_id = OBJECT_ID('appointments') AND name = 'status')
-    ALTER TABLE appointments ADD status VARCHAR(50) COLLATE Arabic_100_CI_AS DEFAULT 'Pending';
-
-IF NOT EXISTS (SELECT * FROM sys.columns WHERE object_id = OBJECT_ID('appointments') AND name = 'patient_id')
-BEGIN
-    ALTER TABLE appointments ADD patient_id INT NULL;
-    ALTER TABLE appointments ADD CONSTRAINT fk_app_patient FOREIGN KEY (patient_id) REFERENCES patients(id) ON DELETE SET NULL;
-END
-
-IF NOT EXISTS (SELECT * FROM sys.columns WHERE object_id = OBJECT_ID('appointments') AND name = 'doctor_id')
-BEGIN
-    ALTER TABLE appointments ADD doctor_id INT NULL;
-    ALTER TABLE appointments ADD CONSTRAINT fk_app_doctor FOREIGN KEY (doctor_id) REFERENCES doctors(id) ON DELETE SET NULL;
-END
-*/
