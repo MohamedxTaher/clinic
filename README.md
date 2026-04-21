@@ -319,7 +319,7 @@ CORS is configured in `CorsConfig.java` to allow requests from:
 | **Ganna Amr Emad** |
 | **Maryam Mohamed Darwish** |
 | **Haneen Mahmoud Abdelfatah** |
-| **Hamdy Mohamed** |
+| **Hana Hamdy Mohamed** |
 
 ---
 
