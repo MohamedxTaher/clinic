@@ -80,6 +80,7 @@ clinic_ssys/
 ├── database/
 │   └── clinic_system.sql    # Complete schema and seed data
 ├── screenshots/             # UI and validation screenshots
+├── Meet_Our_Team.png
 └── README.md
 ```
 
@@ -311,6 +312,10 @@ CORS is configured in `CorsConfig.java` to allow requests from:
 ---
 
 ## Team Members
+
+|The Team Behind This Project |
+|:---------------------------:|
+| ![Our Creative Team](Meet_Our_Team.png) |
 
 | Name |
 |------|
