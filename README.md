@@ -332,13 +332,6 @@ CORS is configured in `CorsConfig.java` to allow requests from:
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
----
-
-## Acknowledgments
-
-- Spring Boot team for the excellent framework
-- Google Fonts for Tajawal and Amiri Arabic fonts
-- Font Awesome for the beautiful icons
 
 ---
 
